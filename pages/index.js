@@ -1,131 +1,91 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import Head from "next/head";
+import StickyNote from "../components/StickyNote";
+import { useState } from "react";
 
 export default function Home() {
+  // For demonstration, we’re storing notes in state
+  const [notes, setNotes] = useState([
+    { id: 1, title: "Welcome!", content: "This is a sample note." },
+    {
+      id: 2,
+      title: "Google Keep Clone",
+      content: "Try adding your own notes!",
+    },
+    { id: 1, title: "Welcome!", content: "This is a sample note." },
+    {
+      id: 2,
+      title: "Google Keep Clone",
+      content: "Try adding your own notes!",
+    },
+
+    // Add more demo notes if you’d like
+  ]);
+
+  // State to handle input from "Take a note..." box
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputContent, setInputContent] = useState("");
+
+  const addNote = () => {
+    if (inputTitle.trim() || inputContent.trim()) {
+      setNotes([
+        ...notes,
+        {
+          id: Date.now(),
+          title: inputTitle,
+          content: inputContent,
+        },
+      ]);
+      setInputTitle("");
+      setInputContent("");
+    }
+  };
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="flex flex-col min-h-screen bg-zinc-500">
+      {/* Header */}
+      <header className="w-full bg-zinc-600 p-4 flex items-center space-x-4 shadow">
+        <h1 className="text-2xl font-bold text-white">Notable</h1>
+      </header>
 
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      {/* Main Content Area */}
+      <main className="flex-1 p-4 flex flex-col items-center">
+        {/* New Note Input */}
+        <div className="w-full max-w-xl bg-gray-50 rounded-md shadow p-4 mb-6">
+          <input
+            type="text"
+            className="w-full mb-2 p-1 text-xl font-semibold border-b border-gray-200 focus:outline-none focus:border-gray-400 bg-transparent"
+            placeholder="Title"
+            value={inputTitle}
+            onChange={(e) => setInputTitle(e.target.value)}
+          />
+          <textarea
+            className="w-full p-1 text-gray-700 border-b border-gray-200 focus:outline-none focus:border-gray-400 bg-transparent"
+            rows="2"
+            placeholder="Take a note..."
+            value={inputContent}
+            onChange={(e) => setInputContent(e.target.value)}
+          />
+          <div className="flex justify-end mt-2">
+            <button
+              onClick={addNote}
+              className="bg-yellow-300 hover:bg-yellow-400 text-gray-800 font-semibold py-1 px-4 rounded-md transition-colors"
+            >
+              Add
+            </button>
+          </div>
+        </div>
 
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        {/* Notes Grid */}
+        <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {notes.map((note) => (
+            <StickyNote
+              key={note.id}
+              title={note.title}
+              content={note.content}
+            />
+          ))}
         </div>
       </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family:
-            Menlo,
-            Monaco,
-            Lucida Console,
-            Liberation Mono,
-            DejaVu Sans Mono,
-            Bitstream Vera Sans Mono,
-            Courier New,
-            monospace;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family:
-            -apple-system,
-            BlinkMacSystemFont,
-            Segoe UI,
-            Roboto,
-            Oxygen,
-            Ubuntu,
-            Cantarell,
-            Fira Sans,
-            Droid Sans,
-            Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </div>
   );
 }
