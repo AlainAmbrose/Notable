@@ -37,9 +37,7 @@ const NewNotePopup = ({ notes, setNotes }) => {
 
   // Close popup when clicking outside
   const handleOverlayClick = (event) => {
-    if (event.target.id === "popup-overlay") {
-      setIsVisible(false);
-    }
+    setIsVisible(false);
   };
 
   return (

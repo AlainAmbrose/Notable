@@ -22,16 +22,16 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-zinc-500">
       {/* Header */}
-      <header className="w-full bg-zinc-600 p-4 flex items-center space-x-4 shadow">
+      <header className="w-full bg-zinc-600 p-4">
         <h1 className="text-2xl font-bold text-white">Notable</h1>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 p-4 flex flex-col items-center">
+      <main className="flex-1 p-4 items-center">
         {/* New Note Input */}
         <NewNotePopup setNotes={setNotes} notes={notes} />
         {/* Notes Grid */}
-        <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {notes.map((note) => (
             <StickyNote
               key={note.id}
