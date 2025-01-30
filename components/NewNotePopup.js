@@ -44,7 +44,7 @@ const NewNotePopup = ({ notes, setNotes }) => {
     <div
       className={clsx(
         !isVisible && "invisible",
-        "fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center opacity-100 z-[1000]"
+        "fixed backdrop-blur-sm top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center opacity-100 z-[1000]"
       )}
       onClick={handleOverlayClick}
     >
