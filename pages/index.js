@@ -29,18 +29,18 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-zinc-500">
       {/* Header */}
-      <header className="w-full bg-zinc-600 p-4">
-        <h1 className="text-2xl font-bold text-white">Notable</h1>
+      <header className="w-full bg-zinc-600 p-3">
+        <h1 className="text-3xl font-bold text-white">Notable</h1>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 p-4 items-center">
+      <main className="flex-1 p-4 items-center overflow-scroll max-h-[calc(100vh-4rem)]">
         {/* New Note Input */}
         <NewNotePopup setNotes={setNotes} notes={notes} />
         {/* Notes Grid */}
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="flex animate-slide-fade gap-4"
+          className="flex animate-slide-fade gap-5"
           columnClassName=""
         >
           {notes.map((note) => (
