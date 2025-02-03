@@ -24,12 +24,17 @@ export default function Home() {
       title: "Google Keep Clone",
       content: "Try adding your own notes!",
     },
+    {
+      id: 4,
+      title: "Google Keep Clone",
+      content: "Try adding your own notes!",
+    },
   ]);
 
   return (
     <div className="flex flex-col min-h-screen bg-zinc-500">
       {/* Header */}
-      <header className="w-full bg-zinc-600 p-3">
+      <header className="w-full bg-[rgba(82,82,82,0.7)] p-3 fixed top-0 left-0 z-50">
         <h1 className="text-3xl font-bold text-white">Notable</h1>
       </header>
 
