@@ -5,8 +5,9 @@ import NewNotePopup from "../components/NewNotePopup.js";
 import Masonry from "react-masonry-css";
 
 const breakpointColumnsObj = {
-  default: 4, // 3 columns on large screens
-  1100: 3, // 2 columns at 1100px and below
+  default: 4, // 4 columns on large screens
+  1500: 3, // 3 columns at 1100px and below
+  1200: 2, // 2 columns at 900px and below
   700: 1, // 1 column at 700px and below
 };
 
@@ -32,17 +33,12 @@ export default function Home() {
   ]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-500">
-      {/* Header */}
-      <header className="w-full bg-[rgba(82,82,82,0.7)] p-3 fixed top-0 left-0 z-50">
+    <main className="bg-sky-800 h-screen p-4 items-center overflow-scroll">
+      <header className="bg-sky-600 bg-opacity-70 backdrop-blur-md w-full p-3 fixed top-0 left-0 z-50">
         <h1 className="text-3xl font-bold text-white">Notable</h1>
       </header>
-
-      {/* Main Content Area */}
-      <main className="flex-1 p-4 items-center overflow-scroll max-h-[calc(100vh-4rem)]">
-        {/* New Note Input */}
+      <div className="mt-20">
         <NewNotePopup setNotes={setNotes} notes={notes} />
-        {/* Notes Grid */}
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="flex animate-slide-fade gap-5"
@@ -56,7 +52,7 @@ export default function Home() {
             />
           ))}
         </Masonry>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
