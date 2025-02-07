@@ -22,12 +22,11 @@ const NewNotePopup = ({ notes, setNotes }) => {
     }
   };
 
-  // Handle keydown event for Command + I (Mac) or Ctrl + I (Windows/Linux)
   useEffect(() => {
     const handleKeyDown = (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "i") {
         event.preventDefault(); // Prevents browser default (like italicizing text)
-        setIsVisible((prev) => !prev); // Toggle popup visibility
+        setIsVisible((prev) => !prev);
       }
     };
 
@@ -35,7 +34,6 @@ const NewNotePopup = ({ notes, setNotes }) => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Close popup when clicking outside
   const handleOverlayClick = (event) => {
     setIsVisible(false);
   };
