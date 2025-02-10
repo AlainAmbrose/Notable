@@ -22,12 +22,11 @@ const NewNotePopup = ({ notes, setNotes }) => {
     }
   };
 
-  // Handle keydown event for Command + I (Mac) or Ctrl + I (Windows/Linux)
   useEffect(() => {
     const handleKeyDown = (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "i") {
         event.preventDefault(); // Prevents browser default (like italicizing text)
-        setIsVisible((prev) => !prev); // Toggle popup visibility
+        setIsVisible((prev) => !prev);
       }
     };
 
@@ -35,7 +34,6 @@ const NewNotePopup = ({ notes, setNotes }) => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Close popup when clicking outside
   const handleOverlayClick = (event) => {
     setIsVisible(false);
   };
@@ -44,7 +42,7 @@ const NewNotePopup = ({ notes, setNotes }) => {
     <div
       className={clsx(
         !isVisible && "invisible",
-        "fixed backdrop-blur-sm top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center opacity-100 z-[1000]"
+        "fixed top-0 backdrop-blur-sm left-0 w-full h-full bg-black/50 flex justify-center items-center opacity-100 z-[1000]"
       )}
       onClick={handleOverlayClick}
     >
@@ -61,7 +59,7 @@ const NewNotePopup = ({ notes, setNotes }) => {
           onChange={(e) => setInputTitle(e.target.value)}
         />
         <textarea
-          className="w-full p-1 text-gray-700 border-b border-gray-200 focus:outline-none focus:border-gray-400 bg-transparent"
+          className="w-full p-1 border-b border-gray-200 focus:outline-none focus:border-gray-400 bg-transparent"
           rows="2"
           placeholder="Take a note..."
           value={inputContent}
