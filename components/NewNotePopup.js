@@ -20,6 +20,7 @@ const NewNotePopup = ({ notes, setNotes }) => {
       setInputTitle("");
       setInputContent("");
     }
+    setIsVisible(false);
   };
 
   useEffect(() => {
@@ -47,19 +48,18 @@ const NewNotePopup = ({ notes, setNotes }) => {
       onClick={handleOverlayClick}
     >
       <div
-        className="bg-zinc-500 p-5 rounded-lg w-[100vh] h-[75vh] shadow-md scale-95 transition-transform duration-150 ease-in opacity-85 overflow-scroll scrollbar-hide"
+        className="bg-sky-500 w-[60vh] min-h-[25vh] p-5 rounded-lg shadow-md scale-95 transition-transform duration-150 ease-in opacity-85 overflow-scroll scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
-        <h1 className="">New Note</h1>
         <input
           type="text"
-          className="w-full mb-2 p-1 text-xl font-semibold border-b border-gray-200 focus:outline-none focus:border-gray-400 bg-transparent"
+          className="placeholder-white text-white  w-full mb-2 p-1 text-2xl font-bold focus:outline-none bg-transparent"
           placeholder="Title"
           value={inputTitle}
           onChange={(e) => setInputTitle(e.target.value)}
         />
         <textarea
-          className="w-full p-1 border-b border-gray-200 focus:outline-none focus:border-gray-400 bg-transparent"
+          className="placeholder-white text-white w-full min-h-[50vh] resize-none p-1 text-xl font-semibold focus:outline-none bg-transparent"
           rows="2"
           placeholder="Take a note..."
           value={inputContent}
