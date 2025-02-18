@@ -7,12 +7,14 @@ const NewNotePopup = ({
   setNotes,
   newNoteIsVisible,
   setNewNoteIsVisible,
+  setIsMasonryReady,
 }) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
 
   const addNote = () => {
     if (inputTitle.trim() || inputContent.trim()) {
+      setIsMasonryReady(false);
       setNotes([
         ...notes,
         {
@@ -51,7 +53,7 @@ const NewNotePopup = ({
       onClick={handleOverlayClick}
     >
       <div
-        className="bg-sky-500 w-[60vh] min-h-[25vh] p-5 rounded-lg shadow-md scale-95 transition-transform duration-150 ease-in opacity-85 overflow-scroll scrollbar-hide"
+        className="bg-sky-500 w-[60vh] min-h-[25vh] p-5 rounded-lg shadow-md scale-95 transition-transform duration-150 ease-in overflow-scroll scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
         <input
