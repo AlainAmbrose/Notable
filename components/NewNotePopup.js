@@ -41,6 +41,7 @@ const NewNotePopup = ({
   }, []);
 
   const handleOverlayClick = (event) => {
+    addNote();
     setNewNoteIsVisible(false);
   };
 
@@ -70,14 +71,6 @@ const NewNotePopup = ({
           value={inputContent}
           onChange={(e) => setInputContent(e.target.value)}
         />
-        <div className="flex justify-end mt-2">
-          <button
-            onClick={addNote}
-            className="bg-yellow-300 hover:bg-yellow-400 text-gray-800 font-semibold py-1 px-4 rounded-md transition-colors"
-          >
-            Add
-          </button>
-        </div>
       </div>
     </div>
   );
