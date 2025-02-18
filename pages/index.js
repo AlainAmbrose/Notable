@@ -1,16 +1,9 @@
 import Head from "next/head";
 import StickyNote from "../components/StickyNote";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NewNotePopup from "../components/NewNotePopup.js";
-import Masonry from "react-masonry-css";
+import Masonry from "@mui/lab/Masonry";
 import SearchBar from "../components/SearchBar";
-
-const breakpointColumnsObj = {
-  default: 4, // 4 columns on large screens
-  1500: 3, // 3 columns at 1500px and below
-  1200: 2, // 2 columns at 1200px and below
-  700: 1, // 1 column at 700px and below
-};
 
 export default function Home() {
   const [notes, setNotes] = useState([
@@ -36,6 +29,37 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [newNoteIsVisible, setNewNoteIsVisible] = useState(false);
+  const [isMasonryReady, setIsMasonryReady] = useState(false);
+  const [numColumns, setNumColumns] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1600) {
+        setNumColumns(4);
+      } else if (window.innerWidth >= 1200) {
+        setNumColumns(3);
+      } else if (window.innerWidth >= 800) {
+        setNumColumns(2);
+      } else {
+        setNumColumns(1);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Delay rendering to avoid flickering effect
+    const timer = setTimeout(() => {
+      setIsMasonryReady(true);
+    }, 50); // 50ms delay to allow layout shift
+    console.log("Notes changed");
+    return () => clearTimeout(timer);
+  }, [notes]); // Runs whenever notes change
 
   return (
     <>
@@ -95,18 +119,18 @@ export default function Home() {
             notes={notes}
             newNoteIsVisible={newNoteIsVisible}
             setNewNoteIsVisible={setNewNoteIsVisible}
+            setIsMasonryReady={setIsMasonryReady}
           />
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="flex animate-slide-fade gap-5"
-            columnClassName=""
-          >
+          <Masonry columns={numColumns} spacing={2}>
             {notes.map((note) => (
-              <StickyNote
+              <div
                 key={note.id}
-                title={note.title}
-                content={note.content}
-              />
+                style={{
+                  opacity: isMasonryReady ? 1 : 0,
+                }}
+              >
+                <StickyNote title={note.title} content={note.content} />
+              </div>
             ))}
           </Masonry>
         </div>

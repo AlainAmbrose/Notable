@@ -7,12 +7,14 @@ const NewNotePopup = ({
   setNotes,
   newNoteIsVisible,
   setNewNoteIsVisible,
+  setIsMasonryReady,
 }) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
 
   const addNote = () => {
     if (inputTitle.trim() || inputContent.trim()) {
+      setIsMasonryReady(false);
       setNotes([
         ...notes,
         {
@@ -39,6 +41,7 @@ const NewNotePopup = ({
   }, []);
 
   const handleOverlayClick = (event) => {
+    addNote();
     setNewNoteIsVisible(false);
   };
 
@@ -51,7 +54,7 @@ const NewNotePopup = ({
       onClick={handleOverlayClick}
     >
       <div
-        className="bg-sky-500 w-[60vh] min-h-[25vh] p-5 rounded-lg shadow-md scale-95 transition-transform duration-150 ease-in opacity-85 overflow-scroll scrollbar-hide"
+        className="bg-sky-500 w-[60vh] min-h-[25vh] p-5 rounded-lg shadow-md scale-95 transition-transform duration-150 ease-in overflow-scroll scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
         <input
@@ -68,14 +71,6 @@ const NewNotePopup = ({
           value={inputContent}
           onChange={(e) => setInputContent(e.target.value)}
         />
-        <div className="flex justify-end mt-2">
-          <button
-            onClick={addNote}
-            className="bg-yellow-300 hover:bg-yellow-400 text-gray-800 font-semibold py-1 px-4 rounded-md transition-colors"
-          >
-            Add
-          </button>
-        </div>
       </div>
     </div>
   );
