@@ -2,10 +2,14 @@ import React from "react";
 import clsx from "clsx";
 import { useState, useEffect } from "react";
 
-const NewNotePopup = ({ notes, setNotes }) => {
+const NewNotePopup = ({
+  notes,
+  setNotes,
+  newNoteIsVisible,
+  setNewNoteIsVisible,
+}) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
 
   const addNote = () => {
     if (inputTitle.trim() || inputContent.trim()) {
@@ -20,14 +24,13 @@ const NewNotePopup = ({ notes, setNotes }) => {
       setInputTitle("");
       setInputContent("");
     }
-    setIsVisible(false);
   };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "i") {
         event.preventDefault(); // Prevents browser default (like italicizing text)
-        setIsVisible((prev) => !prev);
+        setNewNoteIsVisible((prev) => !prev);
       }
     };
 
@@ -36,13 +39,13 @@ const NewNotePopup = ({ notes, setNotes }) => {
   }, []);
 
   const handleOverlayClick = (event) => {
-    setIsVisible(false);
+    setNewNoteIsVisible(false);
   };
 
   return (
     <div
       className={clsx(
-        !isVisible && "invisible",
+        !newNoteIsVisible && "invisible",
         "fixed top-0 backdrop-blur-sm left-0 w-full h-full bg-black/50 flex justify-center items-center opacity-100 z-[1000]"
       )}
       onClick={handleOverlayClick}
