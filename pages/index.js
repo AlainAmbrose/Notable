@@ -5,13 +5,6 @@ import NewNotePopup from "../components/NewNotePopup.js";
 import Masonry from "@mui/lab/Masonry";
 import SearchBar from "../components/SearchBar";
 
-const breakpointColumnsObj = {
-  default: 4, // 4 columns on large screens
-  1500: 3, // 3 columns at 1500px and below
-  1200: 2, // 2 columns at 1200px and below
-  700: 1, // 1 column at 700px and below
-};
-
 export default function Home() {
   const [notes, setNotes] = useState([
     { id: 1, title: "Welcome!", content: "This is a sample note." },
@@ -37,6 +30,27 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [newNoteIsVisible, setNewNoteIsVisible] = useState(false);
   const [isMasonryReady, setIsMasonryReady] = useState(false);
+  const [numColumns, setNumColumns] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1600) {
+        setNumColumns(4);
+      } else if (window.innerWidth >= 1200) {
+        setNumColumns(3);
+      } else if (window.innerWidth >= 800) {
+        setNumColumns(2);
+      } else {
+        setNumColumns(1);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     // Delay rendering to avoid flickering effect
@@ -107,7 +121,7 @@ export default function Home() {
             setNewNoteIsVisible={setNewNoteIsVisible}
             setIsMasonryReady={setIsMasonryReady}
           />
-          <Masonry columns={4} spacing={2}>
+          <Masonry columns={numColumns} spacing={2}>
             {notes.map((note) => (
               <div
                 key={note.id}
