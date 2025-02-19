@@ -1,0 +1,53 @@
+General:
+    ✔ Set up Next.js project @done(25-02-10 18:16)
+    ✔ Create base note adding functionality @done(25-02-10 18:17)
+    ✔ Set up project goals @done(25-02-10 18:17)
+  
+  Database Integration:
+    ☐ Research MongoDB best practices
+    ☐ Figure out the database schema that will be used
+    ☐ Set up new MongoDB Database
+    ☐ Store new sticky note contents into the database
+  
+  Next.js:
+    ☐ Research benefits of Next.js
+  
+  GraphQL:
+    ☐ Research GraphQL best practices
+    ☐ Create MongoDB GraphQL endpoints
+    ☐ Research how backend is integrated with Next.js
+  
+  Interface:
+    ☐ Determine best method for adding new sticky note
+    ☐ Implement sticky note deletion
+    ☐ Match stciky note popup with sticky notes
+    Long Form Notes:
+      ☐ Add another subscreen that contains longer notes
+      ☐ Create a swap animation and icon between the two pages
+      ☐ Determine best setup for user interface
+      LongNote:
+        ☐ Create the longer note component
+        ☐ Enable code blocks in the component
+        ☐ Enable pictures in the component
+        ☐ make it so that pictures can be dragged and text wraps around them
+    SearchInput:
+      ☐ Create SearchInput component
+      ☐ Make it so that search can be focused using Control O
+    NewNoteButton: 
+      ☐ Create NewNoteButton component
+      ☐ Make so that on hover it becomes 100% bigger and then on the left it shows Control I shortcut
+  
+  Profiles:
+    ☐ Create a sign in screen
+    ☐ Add user icon to the top right of the screen
+    ☐ Integrate sign in with MongoDB
+  
+  Search:
+    ☐ Implement lazy serach functionality
+    ☐ Implement Lazy loading for StickyNotes and LongNotes
+  
+  Misc:
+    ☐ Add tags system
+    ☐ Add filtering
+    ☐ Add reminders
+  
